@@ -38,15 +38,23 @@ fn error_me(a: usize) -> PyResult<usize> {
 
 /// Count the words in a string
 #[pyfunction]
-// fn count_words(words: &str) -> Py<PyAny> {
-fn count_words(words: &str) -> HashMap<&str, usize> {
+fn count_words(words: &str) -> Py<PyAny> {
     let mut result = HashMap::new();
     words.split(' ').for_each(|i| {
         result.entry(i).and_modify(|x| *x += 1).or_insert(1);
     });
-    // Python::with_gil(|py| result.to_object(py))
-    result
+    Python::with_gil(|py| result.to_object(py))
 }
+
+/// Count the words in a string with a specific return type
+// #[pyfunction]
+// fn count_words_specific_return_type(words: &str) -> HashMap<&str, usize> {
+//     let mut result = HashMap::new();
+//     words.split(' ').for_each(|i| {
+//         result.entry(i).and_modify(|x| *x += 1).or_insert(1);
+//     });
+//     result
+// }
 
 /// A Python module implemented in Rust.
 #[pymodule]
