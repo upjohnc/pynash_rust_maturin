@@ -14,11 +14,29 @@ a basic understanding of the tools available in the rust ecosystem.
 
 ## Pyo3 in Example Code
 
-return type: exception pyresult
-pyany using gil
+### Functions
 
-class creation
-impl + struct
+Functions need to be taged with `#[pyfunction]` and then added to the module
+(in the code example it is in the `fn pynash_maturin`).
+For the return type, you can use a native rust type or `Py<PyAny>`.
+You can also, along with `Py<PyAny>`, use the `to_object` method that
+will convert to a python type.  There is an example in the code.
+
+Pyo3 does have `Pyresult<>` for the situations when you knowingly will
+raise an exception.  The example `error_me` shows how you can raise a
+particular python exception type.
+
+[reference of python to rust types](https://pyo3.rs/v0.19.1/conversions/tables)
+
+### Classes
+
+Classes are little more involved.  To try to show the parallels between rust
+and python, rust `struct` would be the attributes of a class and `impl` would
+be the methods of the class.
+
+As the example code shows for MultiplyTwo, the tag `#[pyclass]` is added to `struct`
+and `impl` has `#[pymethods]`.  For the matching `__init__` method, the tag `#[new]`
+as added to one of the methods (common practice is the `new` method in rust).
 
 ## Maturin
 
