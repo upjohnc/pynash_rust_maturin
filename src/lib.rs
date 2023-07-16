@@ -3,8 +3,8 @@ use std::collections::HashMap;
 
 /// Formats the sum of two numbers as string.
 #[pyfunction]
-fn sum_as_string(a: usize, b: usize) -> PyResult<String> {
-    Ok((a + b).to_string())
+fn sum_as_string(a: usize, b: usize) -> String {
+    (a + b).to_string()
 }
 
 /// Example of a python add_class
@@ -32,9 +32,7 @@ fn error_me(a: usize) -> PyResult<usize> {
     if a == 1 {
         Ok(a)
     } else {
-        {
-            Err(PyValueError::new_err("Not 1"))
-        }
+        Err(PyValueError::new_err("Not 1"))
     }
 }
 
@@ -68,9 +66,7 @@ mod tests {
         let input = vec![((1, 2), 3), ((3, 3), 6)];
         for i in input {
             let result = sum_as_string(i.0 .0, i.0 .1);
-            if let Ok(x) = result {
-                assert_eq!(x, i.1.to_string());
-            };
+            assert_eq!(result, i.1.to_string());
         }
     }
 }
