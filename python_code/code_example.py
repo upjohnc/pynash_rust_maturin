@@ -98,4 +98,4 @@ def test_error_me():
 
 def test_error_raise():
     with pytest.raises(Exception):
-        result = error_me(2)
+        _ = error_me(2)

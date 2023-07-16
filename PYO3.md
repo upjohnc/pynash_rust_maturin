@@ -9,7 +9,7 @@ in the Python ecosystem.
 For example: [ruff](https://pypi.org/project/ruff/)
 and [polars](https://pypi.org/project/polars/).
 
-The example code in this repo is to give a starting point or in other words,
+The example code in this repo is to give a starting point and
 a basic understanding of the tools available in the rust ecosystem.
 
 ## Pyo3 in Example Code
@@ -18,12 +18,10 @@ a basic understanding of the tools available in the rust ecosystem.
 
 Functions need to be taged with `#[pyfunction]` and then added to the module
 (in the code example it is in the `fn pynash_maturin`).
-For the return type, you can use a native rust type or `Py<PyAny>`.
-You can also, along with `Py<PyAny>`, use the `to_object` method that
-will convert to a python type.  There is an example in the code.
+For the return type, you can use a native rust type or the python equivalent.
 
 Pyo3 does have `Pyresult<>` for the situations when you knowingly will
-raise an exception.  The example `error_me` shows how you can raise a
+raise an exception.  The example function `error_me` shows how you can raise a
 particular python exception type.
 
 [reference of python to rust types](https://pyo3.rs/v0.19.1/conversions/tables)
@@ -40,7 +38,10 @@ as added to one of the methods (common practice is the `new` method in rust).
 
 ## Maturin
 
-The key commands
+Maturin is the command line tool that is used to build the rust crate for use as
+the python package.
+
+The key commands:
 
 * `init` : sets the basis of rust project to define how the
   build will create a binary for use in python.
@@ -74,7 +75,7 @@ The package can be built and pushed to pypi (`maturin publish`) which then can b
 
 Since the `whl` that is created is a zip file, you could simply create the crate
 and use it side-by-side in your python code.  I don't know if this is best practice,
-but it will let you not have to use pypi if you don't want.
+but it is a way of not using pypi if you so choose.
 You could build the crate (`maturin build`)
 and retrieve it from the `target/wheels/<cargoname>.whl` build location.
 You can unzip it and then copy it to the root directory of your python
