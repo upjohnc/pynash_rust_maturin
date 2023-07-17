@@ -16,7 +16,7 @@ a basic understanding of the tools available in the rust ecosystem.
 
 ### Functions
 
-Functions need to be taged with `#[pyfunction]` and then added to the module
+Functions need to be taged with macro `#[pyfunction]` and then added to the module
 (in the code example it is in the `fn pynash_maturin`).
 For the return type, you can use a native rust type or the python equivalent.
 
@@ -32,8 +32,8 @@ Classes are little more involved.  To try to show the parallels between rust
 and python, rust `struct` would be the attributes of a class and `impl` would
 be the methods of the class.
 
-As the example code shows for MultiplyTwo, the tag `#[pyclass]` is added to `struct`
-and `impl` has `#[pymethods]`.  For the matching `__init__` method, the tag `#[new]`
+As the example code shows for MultiplyTwo, the macro tag `#[pyclass]` is added to `struct`
+and `impl` has `#[pymethods]`.  For the matching `__init__` method, the macro tag `#[new]`
 as added to one of the methods (common practice is the `new` method in rust).
 
 ## Maturin
